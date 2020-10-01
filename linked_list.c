@@ -1,3 +1,8 @@
+// First, the program asks for the number of input values 
+// in order to know how many links in a singly linked list 
+// will need to be created for them. Then for each created
+// link some value will be added.
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,20 +13,21 @@ struct item {
 
 struct item *first;
 
-void print(struct item **r);
+void print();
 void insert(int n);
 
 int main()
 {
 	first = NULL;
 	int n, value;
-	printf("How many number? \n");
+	printf("How many numbers? \n");
 	scanf("%d", &n);
 
 	for(int k = 0; k < n; k++) {
 		printf("Write your number\n");
 		scanf("%d", &value);
 		insert(value);
+		print();
 	}
 
 	return 0;
@@ -29,27 +35,23 @@ int main()
 
 void insert(int n)
 {	
-	struct item *tmp, **r;
+	struct item *tmp;
 	tmp = malloc(sizeof(struct item));
 	tmp->val = n;
 	tmp->next = first;
 	first = tmp;
-	r = &first;
-	print(r);
 	return;
 }
 
-void print(struct item **r)
+void print()
 {
+	struct item *tmp = first;
 	printf("Your numbers: ");
-	while(r != NULL) {
-		printf("%d ", (*r)->val);
-		if((*r)->next == NULL){
-			printf("\n");
-			return;
-		}
-		r = &(*r)->next;
+	while(tmp != NULL) {
+		printf("%d ", tmp->val);
+		tmp = tmp->next;
 	}
+	printf("\n");
+	return;
 }
-
 
