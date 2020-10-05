@@ -14,7 +14,8 @@ struct item {
 
 void print(struct item *first);
 void insert(struct item **check_values, int n);
-void new_node_insert(struct item **check_node, int count, int n);
+void new_node_insert(struct item **check_node, 
+		     struct item *first, int count, int n);
 void print_all(struct item *first);
 
 int main()
@@ -35,7 +36,7 @@ int main()
 	scanf("%d", &new_node);
 	printf("Write your value for this node\n");
 	scanf("%d", &value);
-	new_node_insert(&first, value, new_node);
+	new_node_insert(&first, first, value, new_node);
 	print_all(first);
 
 	return 0;
@@ -61,7 +62,8 @@ void print(struct item *first)
 	printf("\n");
 }
 
-void new_node_insert(struct item **check_node, int count, int n)
+void new_node_insert(struct item **check_node, 
+		     struct item *first, int count, int n)
 {
 	struct item *tmp;
 	struct item **new_node = check_node;
@@ -70,6 +72,11 @@ void new_node_insert(struct item **check_node, int count, int n)
 	}
 	tmp = malloc(sizeof(struct item));
 	tmp->val = count;
+	if(n == 1) {
+		tmp->next = first;
+		*check_node = tmp;
+		return;
+	}
 	tmp->next = (*new_node)->next;
 	(*new_node)->next = tmp;
 }
