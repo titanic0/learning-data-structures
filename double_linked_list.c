@@ -92,17 +92,15 @@ void delete_node(struct item *first, struct item **new_first, int n)
 	if(current->prev != NULL && current->next != NULL) { // if the element to be removed
 		current->prev->next = current->next;	     // is not at the beginning
 		current->next->prev = current->prev;	     // or at the end
-		free(tmp);
 	}
 	else if(current->prev == NULL) {		     // if the element to be removed
 		current->next->prev = NULL;		     // at the beginning
 		*new_first = current->next;
-		free(tmp);
 	}
 	else if(current->next == NULL) {		     // if the element to be removed
 		current->prev->next = NULL;		     // at the end
-		free(tmp);
-	}	
+	}
+	free(tmp);
 }
 
 void print(struct item *first)
